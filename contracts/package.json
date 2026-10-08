@@ -1,0 +1,19 @@
+{
+  "name": "verifyd-contracts",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Verifyd Smart Contract on BOT Chain Bohr Testnet",
+  "scripts": {
+    "compile": "hardhat compile",
+    "test": "hardhat test",
+    "clean": "hardhat clean"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+    "hardhat": "^2.22.18",
+    "typescript": "^5.7.0"
+  },
+  "dependencies": {
+    "dotenv": "^18.0.5"
+  }
+}

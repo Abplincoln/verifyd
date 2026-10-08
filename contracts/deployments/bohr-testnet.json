@@ -1,0 +1,11 @@
+{
+  "network": "BOT Chain Bohr Testnet",
+  "chainId": 968,
+  "rpcUrl": "https://rpc.bohr.life",
+  "explorerUrl": "https://scan.bohr.life",
+  "contractName": "Verifyd",
+  "contractAddress": "0x2a0b615d605332D16ae915D4c8F405e239648074",
+  "deploymentTransaction": "0x3e3d0e021272569c08a757e1e0468a4eba980fbfe78ce23f93b4e137a0038819",
+  "deployedAt": "2026-10-08T05:01:28.798Z",
+  "deployerAddress": "0xE9C3ad963a7C63fBfeEA1eBf9762B0e03549d178"
+}
