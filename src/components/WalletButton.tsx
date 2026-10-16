@@ -2,6 +2,7 @@ import React from 'react';
 import { Wallet, AlertTriangle, LogOut, Loader2, ArrowRightLeft, X } from 'lucide-react';
 import { useWallet } from '../hooks/useWallet';
 import { truncateHash } from '../utils/formatters';
+import { BOT_CHAIN_CONFIG } from '../lib/botchain';
 
 export const WalletButton: React.FC = () => {
   const {
@@ -73,10 +74,10 @@ export const WalletButton: React.FC = () => {
           type="button"
           onClick={switchToBohrTestnet}
           className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-amber-500/15 hover:bg-amber-500/25 border border-amber-500/40 text-amber-300 text-xs font-medium transition-colors cursor-pointer"
-          title={`Connected to Chain ID ${chainId}. Click to switch to BOT Chain Bohr Testnet (968).`}
+          title={`Connected to Chain ID ${chainId}. Click to switch to ${BOT_CHAIN_CONFIG.name} (${BOT_CHAIN_CONFIG.chainId}).`}
         >
           <AlertTriangle className="w-3.5 h-3.5 text-amber-400 shrink-0" />
-          <span>Switch to Bohr (968)</span>
+          <span>Switch to {BOT_CHAIN_CONFIG.shortName} ({BOT_CHAIN_CONFIG.chainId})</span>
           <ArrowRightLeft className="w-3 h-3 text-amber-400 shrink-0" />
         </button>
 

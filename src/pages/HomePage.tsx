@@ -5,6 +5,7 @@ import {
   ArrowRight,
   ExternalLink,
   Fingerprint,
+  Lock,
 } from 'lucide-react';
 import type { ActivePage } from '../types/document';
 import { BOT_CHAIN_CONFIG } from '../lib/botchain';
@@ -29,7 +30,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
         </h1>
 
         <p className="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed">
-          Verifyd anchors cryptographic fingerprints of documents to the BOT Chain Bohr Testnet. Anyone can verify document authenticity in seconds without exposing confidential contents.
+          Verifyd verifies document integrity using cryptographic hashes recorded on BOT Chain. Anyone can verify document authenticity in seconds without exposing confidential contents.
         </p>
 
         {/* CTA Cards */}
@@ -50,7 +51,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                 <span className="text-xs text-indigo-400 font-medium">Issuer Flow</span>
               </div>
               <p className="text-xs text-slate-400 leading-relaxed mb-6">
-                Upload a diploma, certificate, or contract. Generate a cryptographic SHA-256 fingerprint ready to anchor permanently on BOT Chain.
+                Select a document to compute its cryptographic SHA-256 fingerprint locally in your browser. Anchor the hash on the BOT Chain registry using your wallet.
               </p>
             </div>
             <div className="flex items-center gap-2 text-sm font-semibold text-indigo-400 group-hover:text-indigo-300">
@@ -75,7 +76,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                 <span className="text-xs text-emerald-400 font-medium">Verifier Flow</span>
               </div>
               <p className="text-xs text-slate-400 leading-relaxed mb-6">
-                Drop any document to calculate its fingerprint and cross-check directly against the blockchain registry to confirm if it is authentic.
+                Perform instant, gas-free verification. The document is hashed locally in your browser and queried against the on-chain registry without requiring a wallet.
               </p>
             </div>
             <div className="flex items-center gap-2 text-sm font-semibold text-emerald-400 group-hover:text-emerald-300">
@@ -100,9 +101,9 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
             <div className="w-10 h-10 rounded-xl bg-indigo-950 border border-indigo-700/50 flex items-center justify-center text-indigo-400 text-sm font-bold font-mono">
               01
             </div>
-            <h3 className="text-base font-semibold text-white">Local In-Browser Hashing</h3>
+            <h3 className="text-base font-semibold text-white">Local In-Browser SHA-256 Hashing</h3>
             <p className="text-xs text-slate-400 leading-relaxed">
-              When you select a document, your browser generates a standard SHA-256 fingerprint. The actual document file is never transmitted or saved anywhere.
+              When you select a document, your browser generates an irreversible 256-bit SHA-256 fingerprint locally. The actual document file is never uploaded, transferred, or stored anywhere.
             </p>
           </div>
 
@@ -110,9 +111,9 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
             <div className="w-10 h-10 rounded-xl bg-indigo-950 border border-indigo-700/50 flex items-center justify-center text-indigo-400 text-sm font-bold font-mono">
               02
             </div>
-            <h3 className="text-base font-semibold text-white">BOT Chain Registration</h3>
+            <h3 className="text-base font-semibold text-white">On-Chain Hash Registration</h3>
             <p className="text-xs text-slate-400 leading-relaxed">
-              The issuer submits the 256-bit cryptographic digest to the Verifyd smart contract on BOT Chain Bohr Testnet (Chain ID 968) using their wallet.
+              The issuer connects a wallet and records the cryptographic hash along with document classification to the Verifyd smart contract on {BOT_CHAIN_CONFIG.name} (Chain ID {BOT_CHAIN_CONFIG.chainId}).
             </p>
           </div>
 
@@ -120,10 +121,34 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
             <div className="w-10 h-10 rounded-xl bg-emerald-950 border border-emerald-700/50 flex items-center justify-center text-emerald-400 text-sm font-bold font-mono">
               03
             </div>
-            <h3 className="text-base font-semibold text-white">Trustless Verification</h3>
+            <h3 className="text-base font-semibold text-white">Read-Only Verification Against Registry</h3>
             <p className="text-xs text-slate-400 leading-relaxed">
-              Any verifier uploads the file to re-calculate the hash. The app queries the smart contract: if the hash matches, it is marked VERIFIED; otherwise NOT VERIFIED.
+              Any verifier selects a document to re-compute the hash locally. The app queries the smart contract via public RPC: if the hash matches an active record, it is marked VERIFIED; otherwise NOT VERIFIED.
             </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Privacy Architecture Section */}
+      <section className="max-w-6xl mx-auto px-4">
+        <div className="rounded-2xl border border-indigo-900/40 bg-indigo-950/20 p-6 sm:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+          <div className="flex items-start gap-4">
+            <div className="w-12 h-12 rounded-xl bg-indigo-600/20 border border-indigo-500/30 flex items-center justify-center text-indigo-400 shrink-0 mt-0.5">
+              <Lock className="w-6 h-6" />
+            </div>
+            <div className="space-y-1.5">
+              <div className="flex items-center gap-2">
+                <Badge variant="purple" size="sm">
+                  Zero-Knowledge Guarantee
+                </Badge>
+                <h3 className="text-base font-semibold text-white">
+                  Privacy Architecture
+                </h3>
+              </div>
+              <p className="text-xs text-slate-300 max-w-2xl leading-relaxed">
+                The document itself is not uploaded, transferred, or stored by Verifyd. All cryptographic hashing occurs locally within your web browser using SHA-256. Only the irreversible 256-bit hash and document classification are recorded on the blockchain.
+              </p>
+            </div>
           </div>
         </div>
       </section>
@@ -134,14 +159,14 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
           <div className="space-y-1.5">
             <div className="flex items-center gap-2">
               <Badge variant="success" size="sm">
-                Target Network
+                {BOT_CHAIN_CONFIG.isTestnet ? 'Testnet Deployment' : 'Active Network'}
               </Badge>
               <h3 className="text-base font-semibold text-white">
-                BOT Chain Bohr Testnet
+                {BOT_CHAIN_CONFIG.name}
               </h3>
             </div>
             <p className="text-xs text-slate-400 max-w-xl">
-              Verification smart contract transactions operate on Bohr Testnet. Native gas token: BOT.
+              Verification smart contract transactions operate on {BOT_CHAIN_CONFIG.name}. Native gas token: {BOT_CHAIN_CONFIG.currencySymbol}.
             </p>
           </div>
 
@@ -158,7 +183,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 transition-colors"
             >
-              <span>Explorer</span>
+              <span>{BOT_CHAIN_CONFIG.explorerName}</span>
               <ExternalLink className="w-3 h-3 text-slate-400" />
             </a>
           </div>

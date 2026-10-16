@@ -18,7 +18,7 @@ export const Footer: React.FC = () => {
               <span className="font-semibold text-white tracking-tight">Verifyd</span>
             </div>
             <p className="text-xs text-slate-400 leading-relaxed max-w-sm">
-              Cryptographic document proof anchored to BOT Chain Bohr Testnet. Verify what you can prove, without exposing confidential data.
+              Cryptographic document integrity anchored to {BOT_CHAIN_CONFIG.name}. Verify what you can prove, without exposing confidential data.
             </p>
           </div>
 
@@ -29,7 +29,7 @@ export const Footer: React.FC = () => {
               Privacy Architecture
             </h4>
             <p className="text-xs text-slate-400 leading-relaxed">
-              Your files never leave your browser. Verifyd computes a local 256-bit cryptographic digest. Only the irreversible hash is recorded on-chain.
+              Your files never leave your browser. Verifyd computes a local 256-bit SHA-256 cryptographic digest. Only the irreversible hash is recorded on-chain; the document itself is never uploaded or stored.
             </p>
           </div>
 
@@ -42,14 +42,14 @@ export const Footer: React.FC = () => {
             <ul className="text-xs space-y-1.5 text-slate-400">
               <li>
                 Network:{' '}
-                <span className="text-slate-200 font-medium">BOT Chain Bohr Testnet</span>
+                <span className="text-slate-200 font-medium">{BOT_CHAIN_CONFIG.name}</span>
               </li>
               <li>
-                Chain ID: <code className="text-slate-300 font-mono">968</code>
+                Chain ID: <code className="text-slate-300 font-mono">{BOT_CHAIN_CONFIG.chainId}</code>
               </li>
               <li>
                 Native Currency:{' '}
-                <span className="text-slate-200 font-medium">BOT</span>
+                <span className="text-slate-200 font-medium">{BOT_CHAIN_CONFIG.currencySymbol}</span>
               </li>
               <li>
                 <a
@@ -58,7 +58,7 @@ export const Footer: React.FC = () => {
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-1 text-indigo-400 hover:text-indigo-300 underline"
                 >
-                  Bohr Block Explorer <ExternalLink className="w-3 h-3" />
+                  {BOT_CHAIN_CONFIG.explorerName} <ExternalLink className="w-3 h-3" />
                 </a>
               </li>
             </ul>

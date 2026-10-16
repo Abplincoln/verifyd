@@ -91,7 +91,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activePage, onNavigate }) => {
               className="hidden lg:inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-800 text-xs text-slate-300 hover:border-slate-700 transition-colors group"
             >
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              <span className="font-medium text-slate-200">Bohr Testnet</span>
+              <span className="font-medium text-slate-200">{BOT_CHAIN_CONFIG.shortName}</span>
               <span className="text-slate-500 font-mono">ID {BOT_CHAIN_CONFIG.chainId}</span>
               <ArrowUpRight className="w-3.5 h-3.5 text-slate-500 group-hover:text-slate-300 transition-colors" />
             </a>
@@ -154,7 +154,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activePage, onNavigate }) => {
             <div className="flex items-center justify-between px-3 py-2 text-xs text-slate-400">
               <span className="flex items-center gap-1.5">
                 <Globe className="w-3.5 h-3.5 text-emerald-400" />
-                BOT Chain Bohr Testnet (968)
+                {BOT_CHAIN_CONFIG.name} ({BOT_CHAIN_CONFIG.chainId})
               </span>
               <a
                 href={BOT_CHAIN_CONFIG.explorerUrl}

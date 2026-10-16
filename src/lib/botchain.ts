@@ -38,9 +38,11 @@ export const VERIFYD_DEPLOYMENT_TX = '0x3e3d0e021272569c08a757e1e0468a4eba980fbf
 
 export const BOT_CHAIN_CONFIG = {
   name: 'BOT Chain Bohr Testnet',
+  shortName: 'Bohr Testnet',
   chainId: 968,
   rpcUrl: 'https://rpc.bohr.life',
   explorerUrl: 'https://scan.bohr.life',
+  explorerName: 'Bohr Scan',
   currencySymbol: 'BOT',
   contractAddress: VERIFYD_CONTRACT_ADDRESS,
   deploymentTransaction: VERIFYD_DEPLOYMENT_TX,

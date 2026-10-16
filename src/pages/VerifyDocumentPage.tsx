@@ -74,7 +74,7 @@ export const VerifyDocumentPage: React.FC<VerifyDocumentPageProps> = ({ onNaviga
     } catch (err: any) {
       console.error('Verification query failed:', err);
       setVerificationError(
-        'Unable to query BOT Chain Bohr Testnet RPC. Please verify your internet connection or try again.'
+        `Unable to query ${BOT_CHAIN_CONFIG.name} RPC. Please verify your internet connection or try again.`
       );
     } finally {
       setIsVerifying(false);
@@ -146,7 +146,7 @@ export const VerifyDocumentPage: React.FC<VerifyDocumentPageProps> = ({ onNaviga
             <div>
               <h1 className="text-2xl font-bold text-white tracking-tight">Verify Document</h1>
               <p className="text-xs text-slate-400">
-                Public, gas-free document authenticity check powered by BOT Chain Bohr Testnet
+                Public, gas-free document authenticity check powered by {BOT_CHAIN_CONFIG.name}
               </p>
             </div>
           </div>
@@ -167,7 +167,7 @@ export const VerifyDocumentPage: React.FC<VerifyDocumentPageProps> = ({ onNaviga
               </span>
               Upload Document to Verify
             </label>
-            <span className="text-xs text-slate-400">Read in browser only • No wallet required</span>
+            <span className="text-xs text-slate-400">Read locally in browser • No wallet required</span>
           </div>
 
           <FileUpload
@@ -224,7 +224,7 @@ export const VerifyDocumentPage: React.FC<VerifyDocumentPageProps> = ({ onNaviga
                 </div>
                 <div>
                   <h4 className="text-sm font-semibold text-slate-200">
-                    Querying BOT Chain Bohr Testnet...
+                    Querying {BOT_CHAIN_CONFIG.name}...
                   </h4>
                   <p className="text-xs text-slate-400">
                     Calling <code className="text-slate-300 font-mono">documentExists</code> via public RPC. No wallet signature or gas required.
@@ -358,7 +358,7 @@ export const VerifyDocumentPage: React.FC<VerifyDocumentPageProps> = ({ onNaviga
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-1 text-[11px] text-indigo-400 hover:text-indigo-300 underline"
                       >
-                        <span>Bohr Contract</span>
+                        <span>Registry Contract</span>
                         <ExternalLink className="w-3 h-3" />
                       </a>
                     </div>
@@ -369,7 +369,7 @@ export const VerifyDocumentPage: React.FC<VerifyDocumentPageProps> = ({ onNaviga
                 <div className="p-3.5 rounded-xl bg-slate-950/50 border border-emerald-900/40 text-xs text-emerald-200/90 flex items-start gap-2.5">
                   <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
                   <p className="leading-relaxed">
-                    100% Cryptographic Match. The uploaded file is bit-for-bit identical to the document registered on BOT Chain Bohr Testnet.
+                    100% Cryptographic Match. The uploaded file is bit-for-bit identical to the document registered on {BOT_CHAIN_CONFIG.name}.
                   </p>
                 </div>
               </div>
@@ -391,7 +391,7 @@ export const VerifyDocumentPage: React.FC<VerifyDocumentPageProps> = ({ onNaviga
                         </Badge>
                       </div>
                       <p className="text-xs text-rose-300/80 mt-0.5">
-                        No matching cryptographic fingerprint was found on BOT Chain Bohr Testnet for this exact file.
+                        No matching cryptographic fingerprint was found on {BOT_CHAIN_CONFIG.name} for this exact file.
                       </p>
                     </div>
                   </div>
@@ -400,7 +400,7 @@ export const VerifyDocumentPage: React.FC<VerifyDocumentPageProps> = ({ onNaviga
                 <div className="p-4 rounded-xl bg-slate-950/80 border border-rose-900/30 text-xs text-slate-300 space-y-2">
                   <p className="font-semibold text-rose-300">Why was this document not verified?</p>
                   <ul className="list-disc list-inside text-slate-400 space-y-1 text-[11px] leading-relaxed">
-                    <li>This document has never been issued or registered on BOT Chain Bohr Testnet.</li>
+                    <li>This document has never been issued or registered on {BOT_CHAIN_CONFIG.name}.</li>
                     <li>
                       The document has been modified, edited, re-compressed, or cropped since issuance. Even a 1-byte alteration creates an entirely different SHA-256 fingerprint.
                     </li>
@@ -439,7 +439,7 @@ export const VerifyDocumentPage: React.FC<VerifyDocumentPageProps> = ({ onNaviga
               </h4>
               <p className="text-xs text-slate-400 leading-relaxed">
                 Verification queries the public RPC at{' '}
-                <code className="text-slate-300 font-mono">https://rpc.bohr.life</code>. You do not need to connect MetaMask or spend any gas to verify document authenticity.
+                <code className="text-slate-300 font-mono">{BOT_CHAIN_CONFIG.rpcUrl}</code>. You do not need to connect MetaMask or spend any gas to verify document authenticity.
               </p>
             </div>
           </div>

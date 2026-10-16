@@ -115,13 +115,13 @@ export const WalletProvider: React.FC<{ children: ReactNode }> = ({ children }) 
           if (addError?.code === 4001) {
             setError('Network addition was rejected in your wallet.');
           } else {
-            setError(addError?.message || 'Failed to add BOT Chain Bohr Testnet.');
+            setError(addError?.message || `Failed to add ${BOT_CHAIN_CONFIG.name}.`);
           }
         }
       } else if (switchError?.code === 4001) {
         setError('Network switch was rejected in your wallet.');
       } else {
-        setError(switchError?.message || 'Failed to switch to BOT Chain Bohr Testnet.');
+        setError(switchError?.message || `Failed to switch to ${BOT_CHAIN_CONFIG.name}.`);
       }
     }
   }, []);
@@ -169,7 +169,7 @@ export const WalletProvider: React.FC<{ children: ReactNode }> = ({ children }) 
       // 4. If connected to a different network, notify user
       if (currentChain !== TARGET_CHAIN_ID) {
         setError(
-          `Connected to Chain ID ${currentChain}. BOT Chain Bohr Testnet (Chain ID 968) is required.`
+          `Connected to Chain ID ${currentChain}. ${BOT_CHAIN_CONFIG.name} (Chain ID ${TARGET_CHAIN_ID}) is required.`
         );
       }
     } catch (err: any) {

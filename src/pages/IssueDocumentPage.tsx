@@ -127,7 +127,9 @@ export const IssueDocumentPage: React.FC<IssueDocumentPageProps> = ({ onNavigate
     }
 
     if (!isCorrectNetwork) {
-      setSubmitError('Wrong network. Please switch to BOT Chain Bohr Testnet (Chain ID 968).');
+      setSubmitError(
+        `Wrong network. Please switch to ${BOT_CHAIN_CONFIG.name} (Chain ID ${BOT_CHAIN_CONFIG.chainId}).`
+      );
       return;
     }
 
@@ -140,7 +142,7 @@ export const IssueDocumentPage: React.FC<IssueDocumentPageProps> = ({ onNavigate
       if (alreadyExists) {
         setIsAlreadyRegistered(true);
         setSubmitError(
-          'This document has already been registered on BOT Chain Bohr Testnet. Duplicate registrations are prohibited.'
+          `This document has already been registered on ${BOT_CHAIN_CONFIG.name}. Duplicate registrations are prohibited.`
         );
         setIsSubmitting(false);
         return;
@@ -237,7 +239,7 @@ export const IssueDocumentPage: React.FC<IssueDocumentPageProps> = ({ onNavigate
             <div>
               <h1 className="text-2xl font-bold text-white tracking-tight">Issue Document</h1>
               <p className="text-xs text-slate-400">
-                Generate a cryptographic fingerprint and register on BOT Chain Bohr Testnet
+                Compute a cryptographic SHA-256 fingerprint locally and register it on {BOT_CHAIN_CONFIG.name}
               </p>
             </div>
           </div>
@@ -263,7 +265,7 @@ export const IssueDocumentPage: React.FC<IssueDocumentPageProps> = ({ onNavigate
                 </Badge>
               </div>
               <p className="text-xs text-emerald-300/80 mt-0.5">
-                The cryptographic fingerprint is permanently anchored to BOT Chain Bohr Testnet.
+                The cryptographic fingerprint is permanently anchored to {BOT_CHAIN_CONFIG.name}.
               </p>
             </div>
           </div>
@@ -383,7 +385,7 @@ export const IssueDocumentPage: React.FC<IssueDocumentPageProps> = ({ onNavigate
                 </span>
                 Upload Original Document
               </label>
-              <span className="text-xs text-slate-400">Not uploaded to any server</span>
+              <span className="text-xs text-slate-400">Processed locally in browser • Never uploaded</span>
             </div>
 
             <FileUpload
@@ -469,7 +471,7 @@ export const IssueDocumentPage: React.FC<IssueDocumentPageProps> = ({ onNavigate
                     Document Already Registered on BOT Chain
                   </h4>
                   <p className="text-xs text-amber-300/80 leading-relaxed">
-                    This exact file's cryptographic hash already exists in the Verifyd smart contract on Bohr Testnet.
+                    This exact file's cryptographic hash already exists in the Verifyd smart contract on {BOT_CHAIN_CONFIG.name}.
                     Duplicate registrations are not permitted.
                   </p>
                 </div>
@@ -496,7 +498,7 @@ export const IssueDocumentPage: React.FC<IssueDocumentPageProps> = ({ onNavigate
                 </div>
                 <div>
                   <h4 className="text-sm font-semibold text-white">
-                    Target: BOT Chain Bohr Testnet (Chain ID 968)
+                    Target Network: {BOT_CHAIN_CONFIG.name} (Chain ID {BOT_CHAIN_CONFIG.chainId})
                   </h4>
                   <p className="text-xs text-slate-400">
                     Registration submits a transaction calling{' '}
@@ -569,7 +571,7 @@ export const IssueDocumentPage: React.FC<IssueDocumentPageProps> = ({ onNavigate
                 onClick={switchToBohrTestnet}
                 leftIcon={<ArrowRightLeft className="w-4 h-4" />}
               >
-                Switch to Bohr Testnet (968)
+                Switch to {BOT_CHAIN_CONFIG.shortName} ({BOT_CHAIN_CONFIG.chainId})
               </Button>
             ) : isAlreadyRegistered ? (
               <Button
