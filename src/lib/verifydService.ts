@@ -6,7 +6,7 @@ import {
   type Account,
 } from 'viem';
 import {
-  botChainBohrTestnet,
+  botChainMainnet,
   BOT_CHAIN_CONFIG,
   VERIFYD_CONTRACT_ADDRESS,
   verifydAbi,
@@ -14,11 +14,11 @@ import {
 import type { RegisteredDocument } from '../types/document';
 
 /**
- * Read-only public client for BOT Chain Bohr Testnet.
- * Connects directly to https://rpc.bohr.life without requiring a connected wallet.
+ * Read-only public client for BOT Chain Mainnet.
+ * Connects directly to https://rpc.botchain.ai without requiring a connected wallet.
  */
 export const publicClient = createPublicClient({
-  chain: botChainBohrTestnet,
+  chain: botChainMainnet,
   transport: http(BOT_CHAIN_CONFIG.rpcUrl),
 });
 
@@ -121,14 +121,14 @@ export async function registerDocumentOnChain(
     functionName: 'registerDocument',
     args: [documentHash, documentType],
     account,
-    chain: botChainBohrTestnet,
+    chain: botChainMainnet,
   });
 
   return hash;
 }
 
 /**
- * Waits for a document registration transaction to be mined and confirmed on Bohr Testnet.
+ * Waits for a document registration transaction to be mined and confirmed on BOT Chain.
  * @param txHash The transaction hash to wait for.
  * @returns The confirmed transaction receipt.
  */

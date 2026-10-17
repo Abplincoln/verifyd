@@ -1,0 +1,12 @@
+{
+  "network": "BOT Chain Mainnet",
+  "chainId": 677,
+  "rpcUrl": "https://rpc.botchain.ai",
+  "explorerUrl": "https://scan.botchain.ai",
+  "contractName": "Verifyd",
+  "contractAddress": "0xea1f0a5c1398F147cE3FDCD24515d48C5285B325",
+  "deploymentTransaction": "0xdde477ad9f3d2d6d6d0947f64f12ff7b8ede7be346e81d77a4d6cb50b648a049",
+  "blockNumber": 26980500,
+  "deployedAt": "2026-10-17T06:49:58.489Z",
+  "deployerAddress": "0xE9C3ad963a7C63fBfeEA1eBf9762B0e03549d178"
+}
