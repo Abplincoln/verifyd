@@ -9,11 +9,11 @@ import {
   custom,
   type WalletClient,
 } from 'viem';
-import { botChainBohrTestnet, BOT_CHAIN_CONFIG } from '../lib/botchain';
+import { botChainMainnet, BOT_CHAIN_CONFIG } from '../lib/botchain';
 import { WalletContext } from './walletContextDef';
 
-const BOHR_CHAIN_ID_HEX = '0x3c8'; // 968 in hex
-const TARGET_CHAIN_ID = BOT_CHAIN_CONFIG.chainId; // 968
+const TARGET_CHAIN_ID_HEX = `0x${BOT_CHAIN_CONFIG.chainId.toString(16)}` as `0x${string}`;
+const TARGET_CHAIN_ID = BOT_CHAIN_CONFIG.chainId;
 
 export const WalletProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [address, setAddress] = useState<`0x${string}` | null>(null);
@@ -76,8 +76,8 @@ export const WalletProvider: React.FC<{ children: ReactNode }> = ({ children }) 
     };
   }, [disconnectWallet, updateChainId]);
 
-  // Request network switch or add BOT Chain Bohr Testnet (Chain ID 968)
-  const switchToBohrTestnet = useCallback(async () => {
+  // Request network switch or add BOT Chain (Chain ID 677)
+  const switchToTargetNetwork = useCallback(async () => {
     if (typeof window === 'undefined' || !window.ethereum) {
       setError('MetaMask is not detected. Please install MetaMask to switch networks.');
       return;
@@ -87,7 +87,7 @@ export const WalletProvider: React.FC<{ children: ReactNode }> = ({ children }) 
       setError(null);
       await window.ethereum.request({
         method: 'wallet_switchEthereumChain',
-        params: [{ chainId: BOHR_CHAIN_ID_HEX }],
+        params: [{ chainId: TARGET_CHAIN_ID_HEX }],
       });
       setChainId(TARGET_CHAIN_ID);
     } catch (switchError: any) {
@@ -98,7 +98,7 @@ export const WalletProvider: React.FC<{ children: ReactNode }> = ({ children }) 
             method: 'wallet_addEthereumChain',
             params: [
               {
-                chainId: BOHR_CHAIN_ID_HEX,
+                chainId: TARGET_CHAIN_ID_HEX,
                 chainName: BOT_CHAIN_CONFIG.name,
                 rpcUrls: [BOT_CHAIN_CONFIG.rpcUrl],
                 nativeCurrency: {
@@ -125,6 +125,9 @@ export const WalletProvider: React.FC<{ children: ReactNode }> = ({ children }) 
       }
     }
   }, []);
+
+  // Backwards-compatible alias for existing components
+  const switchToBohrTestnet = switchToTargetNetwork;
 
   // Connect wallet
   const connectWallet = useCallback(async () => {
@@ -161,7 +164,7 @@ export const WalletProvider: React.FC<{ children: ReactNode }> = ({ children }) 
       // 3. Initialize viem WalletClient
       const client = createWalletClient({
         account: activeAccount,
-        chain: botChainBohrTestnet,
+        chain: botChainMainnet,
         transport: custom(window.ethereum),
       });
       setWalletClient(client);
@@ -199,6 +202,7 @@ export const WalletProvider: React.FC<{ children: ReactNode }> = ({ children }) 
         walletClient,
         connectWallet,
         disconnectWallet,
+        switchToTargetNetwork,
         switchToBohrTestnet,
         clearError,
       }}

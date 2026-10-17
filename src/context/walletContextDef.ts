@@ -12,6 +12,7 @@ export interface WalletContextType {
   walletClient: WalletClient | null;
   connectWallet: () => Promise<void>;
   disconnectWallet: () => void;
+  switchToTargetNetwork: () => Promise<void>;
   switchToBohrTestnet: () => Promise<void>;
   clearError: () => void;
 }
