@@ -23,7 +23,7 @@ export const publicClient = createPublicClient({
 });
 
 /**
- * Checks whether a document hash is registered on BOT Chain Bohr Testnet.
+ * Checks whether a document hash is registered on BOT Chain Mainnet.
  * @param documentHash The 32-byte hex hash (e.g. 0x...) of the document.
  * @returns boolean indicating if the document exists in the Verifyd registry.
  */

@@ -15,7 +15,7 @@ export const WalletButton: React.FC = () => {
     error,
     connectWallet,
     disconnectWallet,
-    switchToBohrTestnet,
+    switchToTargetNetwork,
     clearError,
   } = useWallet();
 
@@ -72,7 +72,7 @@ export const WalletButton: React.FC = () => {
       <div className="flex items-center gap-2">
         <button
           type="button"
-          onClick={switchToBohrTestnet}
+          onClick={switchToTargetNetwork}
           className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-amber-500/15 hover:bg-amber-500/25 border border-amber-500/40 text-amber-300 text-xs font-medium transition-colors cursor-pointer"
           title={`Connected to Chain ID ${chainId}. Click to switch to ${BOT_CHAIN_CONFIG.name} (${BOT_CHAIN_CONFIG.chainId}).`}
         >
@@ -93,7 +93,7 @@ export const WalletButton: React.FC = () => {
     );
   }
 
-  // Connected on BOT Chain Bohr Testnet
+  // Connected on BOT Chain Mainnet
   return (
     <div className="flex items-center gap-2">
       <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-800 text-xs text-slate-200">

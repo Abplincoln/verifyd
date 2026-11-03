@@ -10,6 +10,7 @@ import {
 import type { ActivePage } from '../types/document';
 import { BOT_CHAIN_CONFIG } from '../lib/botchain';
 import { Badge } from '../components/Badge';
+import { truncateHash } from '../utils/formatters';
 
 interface HomePageProps {
   onNavigate: (page: ActivePage) => void;
@@ -21,8 +22,9 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
       {/* Hero Section */}
       <section className="text-center space-y-6 max-w-4xl mx-auto px-4">
         <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-950/60 border border-indigo-700/50 text-indigo-300 text-xs font-medium">
+          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
           <Fingerprint className="w-3.5 h-3.5 text-indigo-400" />
-          <span>Blockchain-Powered Document Integrity</span>
+          <span>Built on BOT Chain Mainnet</span>
         </div>
 
         <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-[1.15]">
@@ -30,7 +32,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
         </h1>
 
         <p className="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed">
-          Verifyd verifies document integrity using cryptographic hashes recorded on BOT Chain. Anyone can verify document authenticity in seconds without exposing confidential contents.
+          Verifyd uses <strong className="text-white font-semibold">BOT Chain</strong> to register and verify document fingerprints. Anyone can verify document authenticity in seconds without exposing confidential contents.
         </p>
 
         {/* CTA Cards */}
@@ -123,7 +125,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
             </div>
             <h3 className="text-base font-semibold text-white">Read-Only Verification Against Registry</h3>
             <p className="text-xs text-slate-400 leading-relaxed">
-              Any verifier selects a document to re-compute the hash locally. The app queries the smart contract via public RPC: if the hash matches an active record, it is marked VERIFIED; otherwise NOT VERIFIED.
+              Any verifier selects a document to re-compute the hash locally. The app queries the smart contract via BOT Chain public RPC: if the hash matches an active record, it is marked VERIFIED; otherwise NOT VERIFIED.
             </p>
           </div>
         </div>
@@ -146,7 +148,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                 </h3>
               </div>
               <p className="text-xs text-slate-300 max-w-2xl leading-relaxed">
-                The document itself is not uploaded, transferred, or stored by Verifyd. All cryptographic hashing occurs locally within your web browser using SHA-256. Only the irreversible 256-bit hash and document classification are recorded on the blockchain.
+                The document itself is not uploaded, transferred, or stored by Verifyd. All cryptographic hashing occurs locally within your web browser using SHA-256. Only the irreversible 256-bit hash and document classification are recorded on BOT Chain.
               </p>
             </div>
           </div>
@@ -155,35 +157,57 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
 
       {/* Network Specs Banner */}
       <section className="max-w-6xl mx-auto px-4">
-        <div className="rounded-2xl border border-slate-800 bg-slate-900/60 p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-          <div className="space-y-1.5">
+        <div className="rounded-2xl border border-slate-800 bg-slate-900/60 p-6 sm:p-8 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
+          <div className="space-y-2 max-w-xl">
             <div className="flex items-center gap-2">
               <Badge variant="success" size="sm">
-                {BOT_CHAIN_CONFIG.isTestnet ? 'Testnet Deployment' : 'Active Network'}
+                Built on BOT Chain Mainnet
               </Badge>
-              <h3 className="text-base font-semibold text-white">
+              <h3 className="text-lg font-semibold text-white">
                 {BOT_CHAIN_CONFIG.name}
               </h3>
             </div>
-            <p className="text-xs text-slate-400 max-w-xl">
-              Verification smart contract transactions operate on {BOT_CHAIN_CONFIG.name}. Native gas token: {BOT_CHAIN_CONFIG.currencySymbol}.
+            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+              Verifyd uses BOT Chain to register and verify document fingerprints. Every document's cryptographic hash is immutably anchored to the smart contract on BOT Chain Mainnet for trustless proof of authenticity.
             </p>
+            <div className="flex flex-wrap items-center gap-4 pt-1">
+              <a
+                href={BOT_CHAIN_CONFIG.websiteUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-xs text-indigo-400 hover:text-indigo-300 font-medium transition-colors"
+              >
+                <span>BOT Chain Website</span>
+                <ExternalLink className="w-3.5 h-3.5" />
+              </a>
+              <a
+                href={BOT_CHAIN_CONFIG.explorerUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-xs text-emerald-400 hover:text-emerald-300 font-medium transition-colors"
+              >
+                <span>BOT Chain Mainnet Explorer</span>
+                <ExternalLink className="w-3.5 h-3.5" />
+              </a>
+            </div>
           </div>
 
-          <div className="flex flex-wrap items-center gap-3 text-xs font-mono">
-            <div className="px-3 py-1.5 rounded-lg bg-slate-950 border border-slate-800 text-slate-300">
+          <div className="flex flex-wrap items-center gap-2.5 text-xs font-mono">
+            <div className="px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-slate-300">
               Chain ID: <span className="text-emerald-400 font-semibold">{BOT_CHAIN_CONFIG.chainId}</span>
             </div>
-            <div className="px-3 py-1.5 rounded-lg bg-slate-950 border border-slate-800 text-slate-300">
+            <div className="px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-slate-300">
               Token: <span className="text-indigo-400 font-semibold">{BOT_CHAIN_CONFIG.currencySymbol}</span>
             </div>
             <a
-              href={BOT_CHAIN_CONFIG.explorerUrl}
+              href={`${BOT_CHAIN_CONFIG.explorerUrl}/address/${BOT_CHAIN_CONFIG.contractAddress}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 transition-colors"
+              className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-slate-950 hover:bg-slate-900 border border-slate-800 text-slate-300 transition-colors"
+              title={BOT_CHAIN_CONFIG.contractAddress}
             >
-              <span>{BOT_CHAIN_CONFIG.explorerName}</span>
+              <span>Contract:</span>
+              <span className="text-indigo-300 font-semibold">{truncateHash(BOT_CHAIN_CONFIG.contractAddress, 6, 4)}</span>
               <ExternalLink className="w-3 h-3 text-slate-400" />
             </a>
           </div>

@@ -48,7 +48,7 @@ export const IssueDocumentPage: React.FC<IssueDocumentPageProps> = ({ onNavigate
     isCorrectNetwork,
     walletClient,
     connectWallet,
-    switchToBohrTestnet,
+    switchToTargetNetwork,
   } = useWallet();
 
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -82,7 +82,7 @@ export const IssueDocumentPage: React.FC<IssueDocumentPageProps> = ({ onNavigate
       setBytes32Hash(bytes32Hex);
       setIsComputingHash(false);
 
-      // 2. Read-only pre-flight check on BOT Chain Bohr Testnet
+      // 2. Read-only pre-flight check on BOT Chain Mainnet
       setIsCheckingExists(true);
       try {
         const exists = await checkDocumentExists(bytes32Hex);
@@ -156,7 +156,7 @@ export const IssueDocumentPage: React.FC<IssueDocumentPageProps> = ({ onNavigate
         selectedCategory
       );
 
-      // Wait for block confirmation on Bohr Testnet
+      // Wait for block confirmation on BOT Chain Mainnet
       setIsConfirming(true);
       const receipt = await waitForRegistrationConfirmation(txHash);
 
@@ -520,7 +520,7 @@ export const IssueDocumentPage: React.FC<IssueDocumentPageProps> = ({ onNavigate
                 <Button
                   variant="outline"
                   size="sm"
-                  onClick={switchToBohrTestnet}
+                  onClick={switchToTargetNetwork}
                   leftIcon={<ArrowRightLeft className="w-3.5 h-3.5" />}
                 >
                   Switch Network
@@ -568,7 +568,7 @@ export const IssueDocumentPage: React.FC<IssueDocumentPageProps> = ({ onNavigate
             ) : !isCorrectNetwork ? (
               <Button
                 variant="primary"
-                onClick={switchToBohrTestnet}
+                onClick={switchToTargetNetwork}
                 leftIcon={<ArrowRightLeft className="w-4 h-4" />}
               >
                 Switch to {BOT_CHAIN_CONFIG.shortName} ({BOT_CHAIN_CONFIG.chainId})

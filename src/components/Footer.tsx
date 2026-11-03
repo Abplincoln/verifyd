@@ -1,6 +1,7 @@
 import React from 'react';
 import { ShieldCheck, Lock, Cpu, ExternalLink } from 'lucide-react';
 import { BOT_CHAIN_CONFIG } from '../lib/botchain';
+import { truncateHash } from '../utils/formatters';
 
 const CURRENT_YEAR = new Date().getFullYear();
 
@@ -16,9 +17,15 @@ export const Footer: React.FC = () => {
                 <ShieldCheck className="w-4 h-4" />
               </div>
               <span className="font-semibold text-white tracking-tight">Verifyd</span>
+              <span className="text-[10px] font-semibold text-emerald-400 bg-emerald-950/60 border border-emerald-500/30 px-2 py-0.5 rounded-full">
+                Built on BOT Chain
+              </span>
             </div>
             <p className="text-xs text-slate-400 leading-relaxed max-w-sm">
               Cryptographic document integrity anchored to {BOT_CHAIN_CONFIG.name}. Verify what you can prove, without exposing confidential data.
+            </p>
+            <p className="text-xs text-slate-300 font-medium">
+              Verifyd uses BOT Chain to register and verify document fingerprints.
             </p>
           </div>
 
@@ -52,6 +59,31 @@ export const Footer: React.FC = () => {
                 <span className="text-slate-200 font-medium">{BOT_CHAIN_CONFIG.currencySymbol}</span>
               </li>
               <li>
+                Contract:{' '}
+                <a
+                  href={`${BOT_CHAIN_CONFIG.explorerUrl}/address/${BOT_CHAIN_CONFIG.contractAddress}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-mono text-indigo-400 hover:text-indigo-300 underline inline-flex items-center gap-1"
+                  title={BOT_CHAIN_CONFIG.contractAddress}
+                >
+                  {truncateHash(BOT_CHAIN_CONFIG.contractAddress, 6, 4)}
+                  <ExternalLink className="w-3 h-3" />
+                </a>
+              </li>
+              <li>
+                Website:{' '}
+                <a
+                  href={BOT_CHAIN_CONFIG.websiteUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 text-indigo-400 hover:text-indigo-300 underline"
+                >
+                  botchain.ai <ExternalLink className="w-3 h-3" />
+                </a>
+              </li>
+              <li>
+                Explorer:{' '}
                 <a
                   href={BOT_CHAIN_CONFIG.explorerUrl}
                   target="_blank"
@@ -67,8 +99,8 @@ export const Footer: React.FC = () => {
 
         <div className="pt-8 border-t border-slate-900 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
           <p>© {CURRENT_YEAR} Verifyd. All rights reserved.</p>
-          <p className="text-slate-400">
-            Verify what you can prove.
+          <p className="text-slate-300 font-medium">
+            Built on BOT Chain • Verify what you can prove.
           </p>
         </div>
       </div>

@@ -79,6 +79,7 @@ export const BOT_CHAIN_CONFIG = {
   rpcUrl: 'https://rpc.botchain.ai',
   explorerUrl: 'https://scan.botchain.ai',
   explorerName: 'Botscan',
+  websiteUrl: 'https://www.botchain.ai/',
   currencySymbol: 'BOT',
   contractAddress: VERIFYD_MAINNET_CONTRACT_ADDRESS,
   deploymentTransaction: VERIFYD_MAINNET_DEPLOYMENT_TX,
