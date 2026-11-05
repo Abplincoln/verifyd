@@ -12,14 +12,27 @@ export const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           {/* Brand Col */}
           <div className="space-y-3">
-            <div className="flex items-center gap-2">
-              <div className="w-6 h-6 rounded-lg bg-indigo-600/20 border border-indigo-500/30 flex items-center justify-center text-indigo-400">
-                <ShieldCheck className="w-4 h-4" />
+            <div className="flex flex-wrap items-center gap-2">
+              <div className="flex items-center gap-2">
+                <div className="w-6 h-6 rounded-lg bg-indigo-600/20 border border-indigo-500/30 flex items-center justify-center text-indigo-400">
+                  <ShieldCheck className="w-4 h-4" />
+                </div>
+                <span className="font-semibold text-white tracking-tight">Verifyd</span>
               </div>
-              <span className="font-semibold text-white tracking-tight">Verifyd</span>
-              <span className="text-[10px] font-semibold text-emerald-400 bg-emerald-950/60 border border-emerald-500/30 px-2 py-0.5 rounded-full">
-                Built on BOT Chain
-              </span>
+              <a
+                href={BOT_CHAIN_CONFIG.websiteUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-[10px] font-semibold text-emerald-400 bg-emerald-950/60 hover:bg-emerald-950/80 border border-emerald-500/30 px-2 py-0.5 rounded-full transition-colors"
+                title="Built on BOT Chain Mainnet"
+              >
+                <img
+                  src="/botchain-logo.svg"
+                  alt="BOT Chain Logo"
+                  className="h-3 w-auto object-contain"
+                />
+                <span>Built on BOT Chain</span>
+              </a>
             </div>
             <p className="text-xs text-slate-400 leading-relaxed max-w-sm">
               Cryptographic document integrity anchored to {BOT_CHAIN_CONFIG.name}. Verify what you can prove, without exposing confidential data.
@@ -99,9 +112,24 @@ export const Footer: React.FC = () => {
 
         <div className="pt-8 border-t border-slate-900 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
           <p>© {CURRENT_YEAR} Verifyd. All rights reserved.</p>
-          <p className="text-slate-300 font-medium">
-            Built on BOT Chain • Verify what you can prove.
-          </p>
+          <div className="flex flex-wrap items-center justify-center sm:justify-end gap-2 text-slate-300">
+            <a
+              href={BOT_CHAIN_CONFIG.websiteUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 hover:opacity-90 transition-opacity"
+              title="Official BOT Chain Website"
+            >
+              <img
+                src="/botchain-logo.svg"
+                alt="BOT Chain Logo"
+                className="h-4 w-auto object-contain"
+              />
+              <span className="font-medium text-slate-300">Built on BOT Chain</span>
+            </a>
+            <span className="text-slate-600">•</span>
+            <span className="text-slate-400">Verify what you can prove.</span>
+          </div>
         </div>
       </div>
     </footer>
